@@ -23,12 +23,12 @@ class ArbreBinaire:
         # on compte le nombre de fois ou on a une parenthese ouvrante suivie d'un nombre
         return sum(1 for i in range(len(self.value) - 1) if self.value[i] == '(' and self.value[i + 1].isdigit()) 
     
-    def score(self):
+    def score(self): #
         p = 0
         for i in range(len(self.value) - 1):
-            if self.value[i] == '(' and self.value[i + 1].isdigit():
-                p += int(self.value[i + 1])
-        return p / self.poids() if self.poids() > 0 else 0
+            if self.value[i] == '(' and self.value[i + 1].isdigit(): # si on a une parenthese ouvrante suivie d'un nombre
+                p += int(self.value[i + 1]) # on ajoute le nombre a p
+        return p / self.poids() if self.poids() > 0 else 0 # on retourne p divise par le poids si le poids est superieur a 0, sinon on retourne 0
     
 def re_arrange(s):
     s = re.sub(r'([()])', r' \1 ', s) # on ajoute un espace avant et apres chaque parenthese
@@ -77,8 +77,3 @@ def main(fp,start): # fp = forme parenthesee, start = arbre en cours de creation
             allist[start.right] = start.right
  
 
-
-forme_parenthesee = "((((2 A) ((4 literate) (2 presentation))) ((2 that) (3 wonderfully))) ((((2 weaves) (((2 a) ((1 murderous) (2 event))) ((2 in) (2 1873)))) ((2 with) (((1 murderous) (1 rage)) ((2 in) (2 2002))))) (2 .)))"
-
-arbre = creer_arbre(forme_parenthesee)
-print(f"arbre poids :{arbre.poids()}\narbre score :{arbre.score()}")
